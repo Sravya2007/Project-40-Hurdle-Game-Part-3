@@ -3,6 +3,7 @@ class Player {
     this.index = null;
     this.distance = 0;
     this.name = null;
+    this.gameState = 0;
   }
 
   getCount(){
@@ -19,10 +20,19 @@ class Player {
   }
 
   update(){
-    var playerIndex = "players/player" + this.index;
+    var playerIndex = 'players/player' + this.index;
     database.ref(playerIndex).set({
       name:this.name,
       distance:this.distance
+    });
+  }
+
+  updateGameState(gameStatePassed){
+    var playerIndex = 'players/player' + this.index;
+    database.ref(playerIndex).set({
+      name:this.name,
+      distance:this.distance,      
+      gameState: gameStatePassed
     });
   }
 

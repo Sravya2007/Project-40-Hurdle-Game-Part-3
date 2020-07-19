@@ -1,6 +1,6 @@
 var canvas, backgroundImage;
 
-var gameState = 0;
+var gameState;
 var playerCount;
 var allPlayers;
 var distance = 0;
@@ -8,37 +8,39 @@ var database;
 
 var form, player, game;
 
-var cars, car1, car2, car3, car4;
+var runners, runner1, runner2, runner3, runner4;
 
-var carImg1, carImg2, carImg3, carImg4, trackImg, groundImg;
-
-function preload() {
-  carImg1 = loadImage('images/car1.png');
-  carImg2 = loadImage('images/car2.png');
-  carImg3 = loadImage('images/car3.png');
-  carImg4 = loadImage('images/car4.png');
-  trackImg = loadImage('images/track.jpg');
-  groundImg = loadImage('images/ground.png');
-}
+var hurdle, hurdles;
 
 function setup(){
   canvas = createCanvas(displayWidth - 20, displayHeight-30);
   database = firebase.database();
-  game = new Game();
-  game.getState();
-  game.start();
+  game = new Game(); 
+  game.start(); 
 }
 
-
 function draw(){
-  if(playerCount === 4){
-    game.update(1);
+  if(player.index !== null){
+    game.getState(player.index); 
+    if(playerCount === 4 && gameState !== 2){   
+      player.updateGameState(1); 
+      
+      Player.getPlayerInfo();    
+      
+        for(var plr in allPlayers){
+          game.getState(player.index);     
+
+          if(gameState === 1){
+            clear();
+            game.play();
+          }     
+          
+          if(gameState === 2) {
+            game.end();
+          }         
+        }
+    }
+
   }
-  if(gameState === 1){
-    clear();
-    game.play();
-  }
-  if(gameState === 2) {
-    game.end();
-  }
+
 }
