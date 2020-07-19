@@ -19,7 +19,7 @@ function preload() {
   runner_2_img = loadImage('images/Runner2.png');
   runner_3_img = loadImage('images/Runner3.png');
   runner_4_img = loadImage('images/Runner4.png');
-  hurdleImg = loadImage('images/HurdleImg.png');
+  hurdleImg = loadImage('images/hurdleImg.png');
 }
 
 function setup(){
@@ -50,7 +50,5 @@ function draw(){
           }         
         }
     }
-
   }
-
 }

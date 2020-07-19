@@ -34,7 +34,6 @@ class Game {
     runner4 = createSprite(200, 700, 20, 20);
     runner4.addImage("runner4", runner_4_img);
     runner4.scale = 0.4;
-    
     runners = [runner1, runner2, runner3, runner4];
     
     hurdles = [];
