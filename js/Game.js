@@ -72,8 +72,6 @@ class Game {
 
         if (index === player.index){
           runners[index - 1].shapeColor = "red";
-          fill("red");
-          //ellipse(x, y, 50, 50);
           camera.position.x = runners[index - 1].x;
           
           if(keyIsDown(UP_ARROW) && player.index !== null) {
