@@ -30,13 +30,14 @@ class Form {
       player.index = playerCount;
       player.update();
       player.updateCount(playerCount);
-      this.greeting.html("Hello " + player.name)
-      this.greeting.position(displayWidth/2 - 70, displayHeight/4);
+      this.greeting.html("Hello " + player.name + "," + " " + "Please wait for others to join...");
+      this.greeting.position(displayWidth/2 - 150, displayHeight/4);
     });
 
     this.reset.mousePressed(()=>{
       player.updateCount(0);
       player.updateGameState(0); 
+      Player.updateRunnersAtEnd(0);
     });
 
   }

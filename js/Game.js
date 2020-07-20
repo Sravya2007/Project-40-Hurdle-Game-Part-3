@@ -43,6 +43,8 @@ class Game {
     form.hide();
 
     Player.getPlayerInfo();
+
+    player.getRunnersAtEnd();
     
     if(allPlayers !== undefined){
 
@@ -63,7 +65,6 @@ class Game {
         if(frameCount % 60 === 0) {
             hurdle = createSprite(runners[index-1].x - 200, runners[index-1].y, 30, 20);
             hurdle.life = 200;     
-            hurdle.shapeColor = "Blue";
             hurdle.addImage("hurdle", hurdleImg);
             hurdle.scale = 0.2;
             
@@ -71,13 +72,15 @@ class Game {
         }
 
         if (index === player.index){
-          runners[index - 1].shapeColor = "red";
           camera.position.x = runners[index - 1].x;
           
           if(keyIsDown(UP_ARROW) && player.index !== null) {
             runners[index - 1].y = runners[index - 1].y - 90;
           }
 
+          stroke(10);
+          fill("red");
+          ellipse(runners[index - 1].x, runners[index - 1].y, 40, 40);
           
           if(hurdles[index-1] !== undefined && runners[index-1].isTouching(hurdles[index-1])){
             player.updateGameState(2);
@@ -86,9 +89,14 @@ class Game {
           }  
           
           if(player.distance >= 8000) {
+            player.rank += 1;
             textSize(20);
             text("Game Over",  runners[index - 1].x - 100, runners[index - 1].y - 100);
+            fill("blue");
+            text("Name:" + " " + player.name, runners[index - 1].x, runners[index - 1].y - 150);
+            text("Rank:" + " " + player.rank, runners[index - 1].x, runners[index - 1].y - 200);
             player.updateGameState(2);
+            Player.updateRunnersAtEnd(player.rank);
           }
 
         }
